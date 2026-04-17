@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GHS 預算項目清單</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg-primary:#0a0a0f;--bg-card:#12121a;--accent:#ffd700;--accent-dim:#b8960b;--orange:#FF6B35;--teal:#00D4AA;--text-primary:#fff;--text-secondary:#8a8a9a;--text-muted:#5a5a6a;--border:#2a2a3a;--danger:#ff4757;--danger-bg:rgba(255,71,87,.1)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Noto Sans TC',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;padding:2rem;background-image:radial-gradient(ellipse at 20% 0%,rgba(255,215,0,.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(0,212,170,.05) 0%,transparent 50%)}
+    .container{max-width:750px;margin:0 auto}
+    header{text-align:center;margin-bottom:2.5rem;position:relative}
+    header::before{content:'';position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:var(--accent);border-radius:2px}
+    h1{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;letter-spacing:.02em;margin-bottom:.5rem;background:linear-gradient(135deg,var(--accent) 0%,#fff 50%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    h1 span{font-family:'Noto Sans TC',sans-serif}
+    .subtitle{color:var(--text-secondary);font-size:.95rem}
+    .save-status{display:inline-flex;align-items:center;gap:.4rem;margin-top:.4rem;font-size:.8rem;color:var(--text-muted);transition:all .3s}
+    .save-status.saving{color:var(--orange)}.save-status.saved{color:var(--teal)}.save-status.error{color:var(--danger)}
+    .save-dot{width:8px;height:8px;border-radius:50%;background:var(--text-muted);transition:background .3s}
+    .saving .save-dot{background:var(--orange);animation:pulse .8s infinite}.saved .save-dot{background:var(--teal)}.error .save-dot{background:var(--danger)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .category{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem;transition:border-color .3s;animation:fadeIn .3s ease-out}
+    .category:hover{border-color:rgba(255,215,0,.2)}
+    .category-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+    .category-icon{font-size:1.3rem}.category-title{font-size:1.1rem;font-weight:700;color:var(--accent)}
+    .category-count{margin-left:auto;font-size:.8rem;color:var(--text-muted);background:rgba(255,215,0,.1);padding:.2rem .6rem;border-radius:10px}
+    .category-subtotal{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--teal);margin-left:.5rem}
+    .item-list{list-style:none}
+    .item{display:flex;align-items:center;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04);gap:.6rem;transition:background .2s}
+    .item:last-child{border-bottom:none;padding-bottom:0}.item:hover{background:rgba(255,255,255,.02);border-radius:8px}
+    .item-number{width:24px;height:24px;background:rgba(255,215,0,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--accent);flex-shrink:0}
+    .item-content{flex:1;min-width:0}.item-name{font-weight:500;font-size:.95rem}.item-note{font-size:.75rem;color:var(--text-muted);margin-top:.1rem}
+    .item-amounts{display:flex;gap:.4rem;align-items:center;flex-shrink:0}
+    .amount-input{width:90px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:.35rem .5rem;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:right;outline:none;transition:border-color .2s,box-shadow .2s}
+    .amount-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,215,0,.15)}
+    .amount-input.pending-input:focus{border-color:var(--orange);box-shadow:0 0 0 2px rgba(255,107,53,.15)}
+    .item-diff{font-family:'JetBrains Mono',monospace;font-size:.8rem;min-width:70px;text-align:right;font-weight:700}
+    .diff-positive{color:var(--teal)}.diff-negative{color:var(--danger)}.diff-zero{color:var(--text-muted)}
+    .btn-delete{width:28px;height:28px;background:transparent;border:1px solid transparent;border-radius:6px;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s;flex-shrink:0}
+    .btn-delete:hover{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+    .add-item-row{display:flex;gap:.5rem;padding-top:.6rem;margin-top:.4rem;border-top:1px dashed rgba(255,255,255,.08)}
+    .add-input{flex:1;background:rgba(255,255,255,.03);border:1px dashed var(--border);border-radius:8px;padding:.4rem .6rem;color:var(--text-primary);font-family:'Noto Sans TC',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s}
+    .add-input:focus{border-color:var(--accent)}.add-input::placeholder{color:var(--text-muted)}
+    .btn-add{background:rgba(255,215,0,.15);border:1px solid var(--accent-dim);border-radius:8px;color:var(--accent);padding:.4rem .8rem;cursor:pointer;font-weight:700;font-size:.85rem;transition:all .2s;white-space:nowrap}
+    .btn-add:hover{background:rgba(255,215,0,.25)}
+    .add-category-bar{display:flex;gap:.5rem;margin-bottom:1rem}
+    .add-category-bar .add-input{border-radius:10px;padding:.6rem .8rem}.add-category-bar .btn-add{border-radius:10px;padding:.6rem 1rem}
+    .total-bar{background:linear-gradient(135deg,rgba(255,215,0,.12) 0%,rgba(0,212,170,.08) 100%);border:1px solid var(--accent-dim);border-radius:14px;padding:1.2rem 1.5rem;margin-top:1.5rem}
+    .total-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem 0}
+    .total-row+.total-row{border-top:1px solid rgba(255,255,255,.08);margin-top:.3rem;padding-top:.6rem}
+    .total-label{font-weight:500;color:var(--text-secondary);font-size:.95rem}
+    .total-label-main{font-weight:700;color:var(--text-primary);font-size:1.05rem}
+    .total-number{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700}
+    .total-number-main{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:var(--accent)}
+    .total-teal{color:var(--teal)}.total-orange{color:var(--orange)}
+    .total-count{font-size:.8rem;color:var(--text-muted);text-align:right;margin-top:.3rem}
+    footer{text-align:center;margin-top:1.5rem;color:var(--text-muted);font-size:.8rem}
+    .col-headers{display:flex;justify-content:flex-end;gap:.4rem;padding:0 0 .5rem 0;margin-bottom:.5rem}
+    .col-h{font-size:.7rem;color:var(--text-muted);text-align:center;letter-spacing:.05em}
+    .col-h-apply{width:90px}.col-h-pending{width:90px}.col-h-diff{width:70px}.col-h-del{width:28px}
+    .loading-overlay{position:fixed;inset:0;background:var(--bg-primary);display:flex;align-items:center;justify-content:center;z-index:999;transition:opacity .4s}
+    .loading-overlay.hide{opacity:0;pointer-events:none}
+    .loading-text{color:var(--accent);font-size:1rem}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:600px){body{padding:1rem}h1{font-size:1.3rem}.amount-input{width:72px;font-size:.78rem;padding:.3rem .4rem}.item-diff{min-width:55px;font-size:.75rem}.category{padding:1rem}.col-h-apply,.col-h-pending{width:72px}.col-h-diff{width:55px}}
+  </style>
+</head>
+<body>
+  <div class="loading-overlay" id="loadingOverlay"><div class="loading-text">載入中 ...</div></div>
+  <div class="container">
+    <header>
+      <h1>GHS <span>預算項目清單</span></h1>
+      <p class="subtitle">向老闆報預算用 — 自動儲存至雲端</p>
+      <div class="save-status" id="saveStatus"><div class="save-dot"></div><span id="saveText">已連線</span></div>
+    </header>
+    <div class="col-headers">
+      <div class="col-h col-h-apply">申請</div>
+      <div class="col-h col-h-pending">待申請</div>
+      <div class="col-h col-h-diff">差額</div>
+      <div class="col-h col-h-del"></div>
+    </div>
+    <div id="categories"></div>
+    <div class="add-category-bar">
+      <input type="text" class="add-input" id="newCatName" placeholder="新增分類名稱 …" onkeydown="if(event.key==='Enter')addCategory()">
+      <button class="btn-add" onclick="addCategory()">+ 分類</button>
+    </div>
+    <div class="total-bar" id="totalBar"></div>
+    <footer>蓋厚勝娛樂城 GHS</footer>
+  </div>
+<script>
+const API_URL='https://ghs-budget-api.gai1680857.workers.dev';
+const DEFAULT_DATA=[
+  {icon:'💻',title:'軟體 & 平台',items:[{name:'AdsPower 社群帳號環境',note:'半年買一送一方案',apply:0,pending:0},{name:'AI 軟體',note:'Claude Pro / ToAPIs 等',apply:0,pending:0},{name:'Meta 粉專 / BM',note:'廣告帳戶 企業管理平台',apply:0,pending:0},{name:'伺服器 / 雲端服務',note:'Cloudflare（目前免費 可能升級）',apply:0,pending:0}]},
+  {icon:'🖥️',title:'硬體設備',items:[{name:'電腦螢幕',note:'',apply:0,pending:0},{name:'麥克風',note:'直播 / 錄音用',apply:0,pending:0}]},
+  {icon:'🪑',title:'辦公環境',items:[{name:'辦公桌椅',note:'',apply:0,pending:0},{name:'直播用桌椅',note:'',apply:0,pending:0},{name:'擺設',note:'佈置 裝飾品',apply:0,pending:0}]},
+  {icon:'📦',title:'營運消耗',items:[{name:'日用品',note:'辦公室消耗品 清潔用品',apply:0,pending:0}]},
+  {icon:'👥',title:'人事費用',items:[{name:'勞健保',note:'勞保 健保 勞退提撥',apply:0,pending:0}]}
+];
+let data=[],saveTimer=null;
+function showStatus(t,txt){const el=document.getElementById('saveStatus'),s=document.getElementById('saveText');el.className='save-status '+t;s.textContent=txt;if(t==='saved')setTimeout(()=>{el.className='save-status';s.textContent='已連線'},2000)}
+async function loadFromCloud(){try{const r=await fetch(API_URL+'/api/budget');const j=await r.json();data=(j&&Array.isArray(j))?j:JSON.parse(JSON.stringify(DEFAULT_DATA))}catch(e){data=JSON.parse(JSON.stringify(DEFAULT_DATA));showStatus('error','離線模式')}}
+async function saveToCloud(){showStatus('saving','儲存中 …');try{await fetch(API_URL+'/api/budget',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});showStatus('saved','已儲存')}catch(e){showStatus('error','儲存失敗')}}
+function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveToCloud,600)}
+const catIcons=['💼','🔧','📊','🎯','🚀','🛒','📱','🎨','🔒','💡'];
+function fmt(n){return n===0?'—':n.toLocaleString('zh-TW')}
+function fmtDiff(n){if(n===0)return'<span class="diff-zero">—</span>';if(n>0)return'<span class="diff-positive">+'+n.toLocaleString('zh-TW')+'</span>';return'<span class="diff-negative">'+n.toLocaleString('zh-TW')+'</span>'}
+function render(){const c=document.getElementById('categories');let g=1,h='';data.forEach((cat,ci)=>{const ca=cat.items.reduce((s,i)=>s+(i.apply||0),0),cp=cat.items.reduce((s,i)=>s+(i.pending||0),0),cd=ca-cp;h+='<div class="category"><div class="category-header"><span class="category-icon">'+cat.icon+'</span><h2 class="category-title">'+cat.title+'</h2><span class="category-count">'+cat.items.length+' 項</span>'+(ca||cp?'<span class="category-subtotal">'+fmt(cd)+'</span>':'')+'</div><ul class="item-list">';cat.items.forEach((item,ii)=>{const d=(item.apply||0)-(item.pending||0);h+='<li class="item"><div class="item-number">'+g+'</div><div class="item-content"><div class="item-name">'+item.name+'</div>'+(item.note?'<div class="item-note">'+item.note+'</div>':'')+'</div><div class="item-amounts"><input type="text" class="amount-input" inputmode="numeric" value="'+(item.apply||'')+'" placeholder="0" onchange="updateAmount('+ci+','+ii+',\'apply\',this.value)" onfocus="this.select()"><input type="text" class="amount-input pending-input" inputmode="numeric" value="'+(item.pending||'')+'" placeholder="0" onchange="updateAmount('+ci+','+ii+',\'pending\',this.value)" onfocus="this.select()"></div><div class="item-diff">'+fmtDiff(d)+'</div><button class="btn-delete" title="刪除" onclick="deleteItem('+ci+','+ii+')">✕</button></li>';g++});h+='</ul><div class="add-item-row"><input type="text" class="add-input" id="addItem_'+ci+'" placeholder="新增項目 …" onkeydown="if(event.key===\'Enter\')addItem('+ci+')"><button class="btn-add" onclick="addItem('+ci+')">+</button></div></div>'});c.innerHTML=h;renderTotals()}
+function renderTotals(){let ta=0,tp=0,ti=0;data.forEach(c=>{c.items.forEach(i=>{ta+=i.apply||0;tp+=i.pending||0});ti+=c.items.length});const td=ta-tp;document.getElementById('totalBar').innerHTML='<div class="total-row"><span class="total-label">申請金額</span><span class="total-number total-teal">$'+ta.toLocaleString('zh-TW')+'</span></div><div class="total-row"><span class="total-label">待申請金額</span><span class="total-number total-orange">$'+tp.toLocaleString('zh-TW')+'</span></div><div class="total-row"><span class="total-label-main">總計 = 申請 − 待申請</span><span class="total-number-main">'+(td>=0?'':'−')+'$'+Math.abs(td).toLocaleString('zh-TW')+'</span></div><div class="total-count">共 '+data.length+' 類 '+ti+' 項</div>'}
+function parseNum(v){const n=parseInt(String(v).replace(/[^0-9-]/g,''),10);return isNaN(n)?0:n}
+function updateAmount(ci,ii,f,v){data[ci].items[ii][f]=parseNum(v);render();scheduleSave()}
+function deleteItem(ci,ii){data[ci].items.splice(ii,1);if(data[ci].items.length===0&&confirm('分類「'+data[ci].title+'」已無項目 是否刪除整個分類？'))data.splice(ci,1);render();scheduleSave()}
+function addItem(ci){const input=document.getElementById('addItem_'+ci);const name=input.value.trim();if(!name)return;data[ci].items.push({name,note:'',apply:0,pending:0});render();scheduleSave()}
+function addCategory(){const input=document.getElementById('newCatName');const title=input.value.trim();if(!title)return;data.push({icon:catIcons[data.length%catIcons.length],title,items:[]});input.value='';render();scheduleSave()}
+(async()=>{await loadFromCloud();render();document.getElementById('loadingOverlay').classList.add('hide')})();
+</script>
+</body>
+</html>
