@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awesome Seedance 2.0 Prompts — Case Library</title>
+<meta name="description" content="44 production-ready Seedance 2.0 video prompts, organized by category.">
+<meta property="og:title" content="Awesome Seedance 2.0 Prompts — Case Library">
+<meta property="og:description" content="44 production-ready Seedance 2.0 video prompts, organized by category.">
+<meta name="theme-color" content="#e8c84a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131a;
+  --surface2: #1c1c26;
+  --border: #2a2a3a;
+  --gold: #e8c84a;
+  --gold-dim: #a8913a;
+  --text: #e8e8f0;
+  --text-muted: #888899;
+  --accent: #6c8aff;
+  --radius: 10px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; color: #f5db6a; }
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; gap: 1rem;
+  height: 56px;
+}
+.nav-brand {
+  font-weight: 700; font-size: 1.05rem;
+  color: var(--gold); letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.nav-sep { color: var(--border); }
+.nav-crumb { color: var(--text-muted); font-size: 0.9rem; }
+.nav-crumb.active { color: var(--text); }
+.nav-spacer { flex: 1; }
+.nav-badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.8rem; color: var(--text-muted);
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,138,255,0.08) 0%, transparent 70%);
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(232,200,74,0.12);
+  border: 1px solid rgba(232,200,74,0.3);
+  border-radius: 99px;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub {
+  max-width: 560px; margin: 0 auto 2rem;
+  color: var(--text-muted); font-size: 1.05rem;
+}
+.hero-stats {
+  display: flex; justify-content: center; gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num { font-size: 1.8rem; font-weight: 700; color: var(--gold); }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* SECTIONS */
+.section { padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section-title {
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.section-title::after {
+  content: ''; flex: 1;
+  height: 1px; background: var(--border); margin-left: 0.5rem;
+}
+
+/* CATEGORY GRID */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.cat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+.cat-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+.cat-card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
+.cat-emoji { font-size: 1.4rem; }
+.cat-name { font-weight: 600; font-size: 0.95rem; }
+.cat-count {
+  margin-left: auto;
+  background: var(--surface2);
+  border-radius: 99px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.75rem; color: var(--text-muted);
+}
+.cat-prompts { display: flex; flex-direction: column; gap: 0.3rem; }
+.cat-prompt-link {
+  font-size: 0.85rem; color: var(--text-muted);
+  padding: 0.25rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s;
+  display: block;
+}
+.cat-prompt-link:hover { color: var(--text); text-decoration: none; }
+
+/* CASE CARD GRID */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.case-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.case-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+.case-card-body { padding: 1.25rem; }
+.case-card-cat {
+  font-size: 0.72rem; color: var(--gold-dim);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 0.4rem; font-weight: 600;
+}
+.case-card-title {
+  font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 0.4rem; line-height: 1.4;
+}
+.case-card-tag { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; }
+
+/* CASE PAGE */
+.case-layout {
+  max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 4rem;
+}
+.case-category-badge {
+  display: inline-block;
+  background: rgba(232,200,74,0.1);
+  border: 1px solid rgba(232,200,74,0.25);
+  border-radius: 99px; padding: 0.25rem 0.9rem;
+  font-size: 0.78rem; color: var(--gold);
+  letter-spacing: 0.04em; margin-bottom: 1.2rem;
+}
+.case-title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.case-tagline { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.8rem; }
+
+/* VIDEO */
+.video-wrap {
+  position: relative; width: 100%;
+  background: #000; border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+.video-wrap video {
+  width: 100%; max-height: 60vh;
+  display: block; background: #000;
+}
+.video-fallback {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px; color: var(--text-muted); font-size: 0.9rem;
+  flex-direction: column; gap: 0.75rem;
+}
+.video-fallback a { color: var(--gold); }
+
+/* SOURCE */
+.source-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.source-box svg { flex-shrink: 0; opacity: 0.5; }
+
+/* PROMPT */
+.prompt-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.prompt-label { font-weight: 600; font-size: 0.95rem; }
+.copy-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35rem 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.8rem; cursor: pointer;
+  transition: all 0.15s; font-family: inherit;
+}
+.copy-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.copy-btn.copied { border-color: #4ade80; color: #4ade80; }
+.prompt-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.85rem; line-height: 1.7;
+  white-space: pre-wrap; word-break: break-word;
+  color: #c8d8e8;
+  max-height: 60vh; overflow-y: auto;
+  tab-size: 2;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 2rem;
+  color: var(--text-muted); font-size: 0.85rem;
+}
+footer a { color: var(--text-muted); }
+footer a:hover { color: var(--gold); }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .nav { padding: 0 1rem; }
+  .hero { padding: 3rem 1rem 2rem; }
+  .section { padding: 2rem 1rem; }
+  .hero-stats { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="/">Seedance Prompts</a>
+  <span class="nav-sep">›</span>
+  <span class="nav-crumb active">All Cases</span>
+  <span class="nav-spacer"></span>
+  <a class="nav-badge" href="https://github.com/gai1680857-prog/awesome-seedance-prompts" target="_blank" rel="noopener">GitHub</a>
+</nav>
+<div class="hero">
+  <div class="hero-tag">Seedance 2.0 · Prompt Library</div>
+  <h1>Community <span>Case</span> Library</h1>
+  <p class="hero-sub">Production-ready prompts with proof clips, clear sourcing, and reusable templates for Seedance 2.0 video generation.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">44</div><div class="stat-label">Prompts</div></div>
+    <div class="stat"><div class="stat-num">13</div><div class="stat-label">Categories</div></div>
+    <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Open Source</div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="section-title">Browse by Category</div>
+  <div class="cat-grid"><div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">🎬</span>
+    <span class="cat-name">Cinematic &amp; VFX</span>
+    <span class="cat-count">10</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/10s-boxing-practice-template">10s Boxing Practice Template</a>
+<a class="cat-prompt-link" href="/cases/cathedral-beneath-the-black-sea">Cathedral Beneath the Black Sea</a>
+<a class="cat-prompt-link" href="/cases/charismatic-vs-noodle-monster">A charismatic 80s action star vs. Noodle Monster</a>
+<a class="cat-prompt-link" href="/cases/explosion-and-physic-scene">Explosion and Physics Scene</a>
+<a class="cat-prompt-link" href="/cases/islands-of-thunder">Islands of Thunder</a>
+<a class="cat-prompt-link" href="/cases/john-woo-style-bullet-ballet-in-a-tight-corridor">John Woo Style - Bullet Ballet in a Tight Corridor</a>
+<a class="cat-prompt-link" href="/cases/magical-transformation">Magical Transformation</a>
+<a class="cat-prompt-link" href="/cases/skyline-titan-chase">Skyline Titan Chase</a>
+<a class="cat-prompt-link" href="/cases/suit-vs-suit-corridor-cover-up">Suit vs. Suit: Corridor Cover-Up</a>
+<a class="cat-prompt-link" href="/cases/tokyo-race-scene">Tokyo Race Scene</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">📦</span>
+    <span class="cat-name">Commercial &amp; Product</span>
+    <span class="cat-count">2</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/hyperdrive-through-the-megacity">Hyperdrive Through the Megacity</a>
+<a class="cat-prompt-link" href="/cases/project-y-rise-above-the-streets">Project Y: Rise Above the Streets</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">📱</span>
+    <span class="cat-name">UGC &amp; Social</span>
+    <span class="cat-count">3</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/10s-mv-trio-pop-guofeng-neon-bass">10s MV Trio: Pop • Guofeng • Neon Bass</a>
+<a class="cat-prompt-link" href="/cases/360-sweet-spot-selfie-reel">360 Sweet-Spot Selfie Reel</a>
+<a class="cat-prompt-link" href="/cases/upright-paws-a-workplace-crush">Upright Paws: A Workplace Crush</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">⚔️</span>
+    <span class="cat-name">Action &amp; Fight</span>
+    <span class="cat-count">5</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/bamboo-run-duel-at-dusk">Bamboo Run: Duel at Dusk</a>
+<a class="cat-prompt-link" href="/cases/indian-Bollywood-action">Indian Bollywood Action Blockbuster</a>
+<a class="cat-prompt-link" href="/cases/modern-air-combat-cinematic-template">Modern Air Combat Cinematic Template</a>
+<a class="cat-prompt-link" href="/cases/three-way-kill-box-suit-assassin-unknown">Three-Way Kill Box: Suit, Assassin, Unknown</a>
+<a class="cat-prompt-link" href="/cases/wu-kong-vs-homelander">Mythic Monkey King Clash</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">✨</span>
+    <span class="cat-name">Anime &amp; Manga</span>
+    <span class="cat-count">5</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/3d-lego-assembly-time-lapse">3D Lego Assembly Time-Lapse</a>
+<a class="cat-prompt-link" href="/cases/azure-ascension-live-action-saiyan-duel">Azure Ascension: Live-Action Saiyan Duel</a>
+<a class="cat-prompt-link" href="/cases/cozy-nighttime-pet-secret">Cozy Nighttime Pet Secret</a>
+<a class="cat-prompt-link" href="/cases/gadget-cat-vs-web-hero-showdown">Gadget Cat vs. Web Hero Showdown</a>
+<a class="cat-prompt-link" href="/cases/sailormoon-bedroom-victory-chat">Inner Guardians: Bedroom Victory Chat</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">💖</span>
+    <span class="cat-name">Drama &amp; Romance</span>
+    <span class="cat-count">3</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/cockpit-panic-sequence">Cockpit Panic Sequence</a>
+<a class="cat-prompt-link" href="/cases/gold-bag-dive-shot">Gold Bag Dive Shot</a>
+<a class="cat-prompt-link" href="/cases/three-micro-episodes-of-love-conflict">Three Micro-Episodes of Love &amp; Conflict</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">🧙</span>
+    <span class="cat-name">Fantasy</span>
+    <span class="cat-count">4</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/butterfly-fairy-tale">Butterfly Fairy Tale</a>
+<a class="cat-prompt-link" href="/cases/chrome-wraith-in-blue-light">Chrome Wraith in Blue Light</a>
+<a class="cat-prompt-link" href="/cases/colossal-baboon-assault">Colossal Baboon Assault</a>
+<a class="cat-prompt-link" href="/cases/photoreal-elemental-sword-sequence-3-shot-blueprint">Photoreal Elemental Sword Sequence (3-Shot Blueprint)</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">👻</span>
+    <span class="cat-name">Horror</span>
+    <span class="cat-count">3</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/kraken-assault-on-a-pirate-ship">Kraken Assault on a Pirate Ship</a>
+<a class="cat-prompt-link" href="/cases/reflection-anomaly-15s-horror-template">Reflection Anomaly (15s Horror Template)</a>
+<a class="cat-prompt-link" href="/cases/stormborne-sea-creature-attack">Stormborne Sea Creature Attack</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">🤖</span>
+    <span class="cat-name">Sci-Fi &amp; Cyberpunk</span>
+    <span class="cat-count">2</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/ancient-goddess-to-cyberpunk-warrior">Ancient Goddess to Cyberpunk Warrior</a>
+<a class="cat-prompt-link" href="/cases/wwii-chase-template">WWII Chase Template</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">🌿</span>
+    <span class="cat-name">Nature &amp; Documentary</span>
+    <span class="cat-count">2</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/image-reference">Image reference</a>
+<a class="cat-prompt-link" href="/cases/quiet-harvest-ritual-three-beat-film-study">Quiet Harvest Ritual (Three-Beat Film Study)</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">🔥</span>
+    <span class="cat-name">Epic Spectacle</span>
+    <span class="cat-count">1</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/wasteland-convoy-breakout">Wasteland Convoy Breakout</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">🦸</span>
+    <span class="cat-name">Superhero Powers</span>
+    <span class="cat-count">2</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/spiderman-vs-octopusman-one-prompt-test">Spiderman vs Octopusman (One-Prompt Test)</a>
+<a class="cat-prompt-link" href="/cases/thanos-vs-spiderman-team">Thanos vs Spiderman Team</a></div>
+</div>
+<div class="cat-card">
+  <div class="cat-card-header">
+    <span class="cat-emoji">😂</span>
+    <span class="cat-name">Comedy &amp; Meme</span>
+    <span class="cat-count">2</span>
+  </div>
+  <div class="cat-prompts"><a class="cat-prompt-link" href="/cases/ava-labs-community-fire-drill">Ava Labs: Community Fire Drill</a>
+<a class="cat-prompt-link" href="/cases/hashbrowns-drama-repeat">Hashbrowns, Drama, Repeat</a></div>
+</div></div>
+</div>
+<div class="section">
+  <div class="section-title">All Cases</div>
+  <div class="case-grid"><a class="case-card" href="/cases/10s-boxing-practice-template" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">10s Boxing Practice Template</div>
+    <div class="case-card-tag">Gritty gym sparring - handheld circling, sweat impacts, stable identity.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/cathedral-beneath-the-black-sea" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">Cathedral Beneath the Black Sea</div>
+    <div class="case-card-tag">Underwater cathedral dive - bioluminescent gloom, vertigo descent, leviathan reveal.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/charismatic-vs-noodle-monster" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">A charismatic 80s action star vs. Noodle Monster</div>
+    <div class="case-card-tag">80s factory monster brawl - film grain, spotlight contrast, big choreography.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/explosion-and-physic-scene" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">Explosion and Physics Scene</div>
+    <div class="case-card-tag">Realistic explosion test - shockwave physics, debris motion, natural light response.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/islands-of-thunder" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">Islands of Thunder</div>
+    <div class="case-card-tag">Sky-island ronin chase - storm lightning, handheld frenzy, impossible leaps.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/john-woo-style-bullet-ballet-in-a-tight-corridor" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">John Woo Style - Bullet Ballet in a Tight Corridor</div>
+    <div class="case-card-tag">John Woo corridor gunfight - snap-zooms, rhythmic edits, slow-mo impact beats.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/magical-transformation" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">Magical Transformation</div>
+    <div class="case-card-tag">Mystic eye awakening on bridge - close-up tension, rapid zoom-out, sky-launch surge.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/skyline-titan-chase" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">Skyline Titan Chase</div>
+    <div class="case-card-tag">Titan city chase - painterly lighting, massive scale gap, destruction pursuit.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/suit-vs-suit-corridor-cover-up" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">Suit vs. Suit: Corridor Cover-Up</div>
+    <div class="case-card-tag">Cramped spy corridor brawl - fast angle switches, clean readability, gag ending.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/tokyo-race-scene" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🎬 Cinematic &amp; VFX</div>
+    <div class="case-card-title">Tokyo Race Scene</div>
+    <div class="case-card-tag">Neon Tokyo street race - multi-scene pacing, dynamic lighting, fast transitions.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/hyperdrive-through-the-megacity" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">📦 Commercial &amp; Product</div>
+    <div class="case-card-title">Hyperdrive Through the Megacity</div>
+    <div class="case-card-tag">Futuristic megacity hyperdrive - ultra-fast traversal, dramatic angles, rapid scene cuts.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/project-y-rise-above-the-streets" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">📦 Commercial &amp; Product</div>
+    <div class="case-card-title">Project Y: Rise Above the Streets</div>
+    <div class="case-card-tag">15s future vehicle spot - neon rain, mechanical transform, vertical takeoff hero shot.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/10s-mv-trio-pop-guofeng-neon-bass" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">📱 UGC &amp; Social</div>
+    <div class="case-card-title">10s MV Trio: Pop • Guofeng • Neon Bass</div>
+    <div class="case-card-tag">10s MV trio pack - beat-synced cuts, three styles, high rewatch rhythm.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/360-sweet-spot-selfie-reel" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">📱 UGC &amp; Social</div>
+    <div class="case-card-title">360 Sweet-Spot Selfie Reel</div>
+    <div class="case-card-tag">Dessert-shop 360 selfie reel - smooth spin, outfit/location swaps, clean transitions.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/upright-paws-a-workplace-crush" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">📱 UGC &amp; Social</div>
+    <div class="case-card-title">Upright Paws: A Workplace Crush</div>
+    <div class="case-card-tag">Pet rom-com meet-cute - upright silhouettes, human-like acting, warm payoff.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/bamboo-run-duel-at-dusk" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">⚔️ Action &amp; Fight</div>
+    <div class="case-card-title">Bamboo Run: Duel at Dusk</div>
+    <div class="case-card-tag">Wuxia bamboo forest duel - sweeping moves, tight cut-ins, thunder clash slow-mo.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/indian-Bollywood-action" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">⚔️ Action &amp; Fight</div>
+    <div class="case-card-title">Indian Bollywood Action Blockbuster</div>
+    <div class="case-card-tag">Bollywood mass action setpiece - gravity stunts, slow-mo build-ups, explosive impacts.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/modern-air-combat-cinematic-template" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">⚔️ Action &amp; Fight</div>
+    <div class="case-card-title">Modern Air Combat Cinematic Template</div>
+    <div class="case-card-tag">Modern jet dogfight - extreme speed, aggressive tracking, cockpit inserts.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/three-way-kill-box-suit-assassin-unknown" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">⚔️ Action &amp; Fight</div>
+    <div class="case-card-title">Three-Way Kill Box: Suit, Assassin, Unknown</div>
+    <div class="case-card-tag">Three-way melee showdown - handheld urgency, whip-pans, alliances flip mid-fight.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/wu-kong-vs-homelander" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">⚔️ Action &amp; Fight</div>
+    <div class="case-card-title">Mythic Monkey King Clash</div>
+    <div class="case-card-tag">Mythic Wukong vs Homelander duel - tight choreography, timed VFX beats, 4s segments.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/3d-lego-assembly-time-lapse" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">✨ Anime &amp; Manga</div>
+    <div class="case-card-title">3D Lego Assembly Time-Lapse</div>
+    <div class="case-card-tag">3D bedroom Lego timelapse - 15s storyboard, smooth camera moves, cozy light.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/azure-ascension-live-action-saiyan-duel" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">✨ Anime &amp; Manga</div>
+    <div class="case-card-title">Azure Ascension: Live-Action Saiyan Duel</div>
+    <div class="case-card-tag">Live-action Saiyan brawl - fast exchanges, heavy hits, escalating energy attacks.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/cozy-nighttime-pet-secret" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">✨ Anime &amp; Manga</div>
+    <div class="case-card-title">Cozy Nighttime Pet Secret</div>
+    <div class="case-card-tag">Cat &amp; dog midnight phone swap - docu-real CG, warm–cool lighting, six-shot beats.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/gadget-cat-vs-web-hero-showdown" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">✨ Anime &amp; Manga</div>
+    <div class="case-card-title">Gadget Cat vs. Web Hero Showdown</div>
+    <div class="case-card-tag">Gadget cat vs web hero - minimalist prompt, high-impact action, clean readability.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/sailormoon-bedroom-victory-chat" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">✨ Anime &amp; Manga</div>
+    <div class="case-card-title">Inner Guardians: Bedroom Victory Chat</div>
+    <div class="case-card-tag">Sailor Moon bedroom banter - line-by-line comedy, small actions, punchy timing.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/cockpit-panic-sequence" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">💖 Drama &amp; Romance</div>
+    <div class="case-card-title">Cockpit Panic Sequence</div>
+    <div class="case-card-tag">Cockpit panic thriller - flashing alarms, shaky cam, turbulence escalation.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/gold-bag-dive-shot" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">💖 Drama &amp; Romance</div>
+    <div class="case-card-title">Gold Bag Dive Shot</div>
+    <div class="case-card-tag">Run-and-dive gold bag - close lens chase, splash hit, underwater follow.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/three-micro-episodes-of-love-conflict" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">💖 Drama &amp; Romance</div>
+    <div class="case-card-title">Three Micro-Episodes of Love &amp; Conflict</div>
+    <div class="case-card-tag">15s romance micro-episodes - shot-level pacing, dialogue tension, emotional turn.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/butterfly-fairy-tale" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🧙 Fantasy</div>
+    <div class="case-card-title">Butterfly Fairy Tale</div>
+    <div class="case-card-tag">Butterfly-to-fairy vignette - whimsical morph, mood reaction beat, quick retreat.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/chrome-wraith-in-blue-light" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🧙 Fantasy</div>
+    <div class="case-card-title">Chrome Wraith in Blue Light</div>
+    <div class="case-card-tag">Chrome-wraith transformation - cold blue mood, liquid metal morph, high-contrast glow.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/colossal-baboon-assault" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🧙 Fantasy</div>
+    <div class="case-card-title">Colossal Baboon Assault</div>
+    <div class="case-card-tag">Armored baboon rampage - village inferno, debris storm, brutal toss beats.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/photoreal-elemental-sword-sequence-3-shot-blueprint" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🧙 Fantasy</div>
+    <div class="case-card-title">Photoreal Elemental Sword Sequence (3-Shot Blueprint)</div>
+    <div class="case-card-tag">Elemental sword duel - 8K realism, fluid arcs, plasma lightning clash.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/kraken-assault-on-a-pirate-ship" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">👻 Horror</div>
+    <div class="case-card-title">Kraken Assault on a Pirate Ship</div>
+    <div class="case-card-tag">Kraken attacks pirate ship - epic scale, stormy ocean atmosphere, heroic sword strike.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/reflection-anomaly-15s-horror-template" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">👻 Horror</div>
+    <div class="case-card-title">Reflection Anomaly (15s Horror Template)</div>
+    <div class="case-card-tag">Mirror-reflection glitch horror - fixed cam, uncanny delay, escalating dread.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/stormborne-sea-creature-attack" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">👻 Horror</div>
+    <div class="case-card-title">Stormborne Sea Creature Attack</div>
+    <div class="case-card-tag">Stormy sea-monster attack - torrential rain, crashing waves, handheld chaos.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/ancient-goddess-to-cyberpunk-warrior" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🤖 Sci-Fi &amp; Cyberpunk</div>
+    <div class="case-card-title">Ancient Goddess to Cyberpunk Warrior</div>
+    
+  </div>
+</a>
+<a class="case-card" href="/cases/wwii-chase-template" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🤖 Sci-Fi &amp; Cyberpunk</div>
+    <div class="case-card-title">WWII Chase Template</div>
+    <div class="case-card-tag">WWII motorcycle escape - period detail, practical blasts, kinetic coverage.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/image-reference" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🌿 Nature &amp; Documentary</div>
+    <div class="case-card-title">Image reference</div>
+    <div class="case-card-tag">Single-photo to cinematic video - real-image reference, strong consistency, zero-text workflow.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/quiet-harvest-ritual-three-beat-film-study" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🌿 Nature &amp; Documentary</div>
+    <div class="case-card-title">Quiet Harvest Ritual (Three-Beat Film Study)</div>
+    <div class="case-card-tag">Farm-to-table trio - extreme macro, natural light, calm ASMR pacing.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/wasteland-convoy-breakout" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🔥 Epic Spectacle</div>
+    <div class="case-card-title">Wasteland Convoy Breakout</div>
+    <div class="case-card-tag">Mad Max-style convoy breakout - scorched desert chase, multi-shot escalation, vehicular chaos.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/spiderman-vs-octopusman-one-prompt-test" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🦸 Superhero Powers</div>
+    <div class="case-card-title">Spiderman vs Octopusman (One-Prompt Test)</div>
+    <div class="case-card-tag">Spider vs octo villain fight - single-shot spectacle, clear motion, minimal input.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/thanos-vs-spiderman-team" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">🦸 Superhero Powers</div>
+    <div class="case-card-title">Thanos vs Spiderman Team</div>
+    <div class="case-card-tag">Thanos apology beatdown - short-form arc, multi-hero staging, punchy payoff.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/ava-labs-community-fire-drill" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">😂 Comedy &amp; Meme</div>
+    <div class="case-card-title">Ava Labs: Community Fire Drill</div>
+    <div class="case-card-tag">Over-the-top exec day-in-the-life skit - fast cuts, nonstop community chaos, meme energy.</div>
+  </div>
+</a>
+<a class="case-card" href="/cases/hashbrowns-drama-repeat" style="display:block;text-decoration:none;color:inherit;">
+  <div class="case-card-body">
+    <div class="case-card-cat">😂 Comedy &amp; Meme</div>
+    <div class="case-card-title">Hashbrowns, Drama, Repeat</div>
+    <div class="case-card-tag">24/7 diner meltdown skit - nonstop tickets, deadpan staff, chaotic interruptions.</div>
+  </div>
+</a></div>
+</div>
+
+<footer>
+  <p>Collected from the community · <a href="https://github.com/gai1680857-prog/awesome-seedance-prompts" target="_blank" rel="noopener">GitHub</a> · MIT License</p>
+</footer>
+</body>
+</html>

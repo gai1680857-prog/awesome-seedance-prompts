@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10s MV Trio: Pop • Guofeng • Neon Bass — Seedance Prompts</title>
+<meta name="description" content="10s MV trio pack - beat-synced cuts, three styles, high rewatch rhythm.">
+<meta property="og:title" content="10s MV Trio: Pop • Guofeng • Neon Bass — Seedance Prompts">
+<meta property="og:description" content="10s MV trio pack - beat-synced cuts, three styles, high rewatch rhythm.">
+<meta name="theme-color" content="#e8c84a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131a;
+  --surface2: #1c1c26;
+  --border: #2a2a3a;
+  --gold: #e8c84a;
+  --gold-dim: #a8913a;
+  --text: #e8e8f0;
+  --text-muted: #888899;
+  --accent: #6c8aff;
+  --radius: 10px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; color: #f5db6a; }
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; gap: 1rem;
+  height: 56px;
+}
+.nav-brand {
+  font-weight: 700; font-size: 1.05rem;
+  color: var(--gold); letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.nav-sep { color: var(--border); }
+.nav-crumb { color: var(--text-muted); font-size: 0.9rem; }
+.nav-crumb.active { color: var(--text); }
+.nav-spacer { flex: 1; }
+.nav-badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.8rem; color: var(--text-muted);
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,138,255,0.08) 0%, transparent 70%);
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(232,200,74,0.12);
+  border: 1px solid rgba(232,200,74,0.3);
+  border-radius: 99px;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub {
+  max-width: 560px; margin: 0 auto 2rem;
+  color: var(--text-muted); font-size: 1.05rem;
+}
+.hero-stats {
+  display: flex; justify-content: center; gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num { font-size: 1.8rem; font-weight: 700; color: var(--gold); }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* SECTIONS */
+.section { padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section-title {
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.section-title::after {
+  content: ''; flex: 1;
+  height: 1px; background: var(--border); margin-left: 0.5rem;
+}
+
+/* CATEGORY GRID */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.cat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+.cat-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+.cat-card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
+.cat-emoji { font-size: 1.4rem; }
+.cat-name { font-weight: 600; font-size: 0.95rem; }
+.cat-count {
+  margin-left: auto;
+  background: var(--surface2);
+  border-radius: 99px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.75rem; color: var(--text-muted);
+}
+.cat-prompts { display: flex; flex-direction: column; gap: 0.3rem; }
+.cat-prompt-link {
+  font-size: 0.85rem; color: var(--text-muted);
+  padding: 0.25rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s;
+  display: block;
+}
+.cat-prompt-link:hover { color: var(--text); text-decoration: none; }
+
+/* CASE CARD GRID */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.case-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.case-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+.case-card-body { padding: 1.25rem; }
+.case-card-cat {
+  font-size: 0.72rem; color: var(--gold-dim);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 0.4rem; font-weight: 600;
+}
+.case-card-title {
+  font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 0.4rem; line-height: 1.4;
+}
+.case-card-tag { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; }
+
+/* CASE PAGE */
+.case-layout {
+  max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 4rem;
+}
+.case-category-badge {
+  display: inline-block;
+  background: rgba(232,200,74,0.1);
+  border: 1px solid rgba(232,200,74,0.25);
+  border-radius: 99px; padding: 0.25rem 0.9rem;
+  font-size: 0.78rem; color: var(--gold);
+  letter-spacing: 0.04em; margin-bottom: 1.2rem;
+}
+.case-title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.case-tagline { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.8rem; }
+
+/* VIDEO */
+.video-wrap {
+  position: relative; width: 100%;
+  background: #000; border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+.video-wrap video {
+  width: 100%; max-height: 60vh;
+  display: block; background: #000;
+}
+.video-fallback {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px; color: var(--text-muted); font-size: 0.9rem;
+  flex-direction: column; gap: 0.75rem;
+}
+.video-fallback a { color: var(--gold); }
+
+/* SOURCE */
+.source-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.source-box svg { flex-shrink: 0; opacity: 0.5; }
+
+/* PROMPT */
+.prompt-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.prompt-label { font-weight: 600; font-size: 0.95rem; }
+.copy-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35rem 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.8rem; cursor: pointer;
+  transition: all 0.15s; font-family: inherit;
+}
+.copy-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.copy-btn.copied { border-color: #4ade80; color: #4ade80; }
+.prompt-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.85rem; line-height: 1.7;
+  white-space: pre-wrap; word-break: break-word;
+  color: #c8d8e8;
+  max-height: 60vh; overflow-y: auto;
+  tab-size: 2;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 2rem;
+  color: var(--text-muted); font-size: 0.85rem;
+}
+footer a { color: var(--text-muted); }
+footer a:hover { color: var(--gold); }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .nav { padding: 0 1rem; }
+  .hero { padding: 3rem 1rem 2rem; }
+  .section { padding: 2rem 1rem; }
+  .hero-stats { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="/">Seedance Prompts</a>
+  <span class="nav-sep">›</span>
+  <a class="nav-crumb" href="/">All Cases</a><span class="nav-sep">›</span><a class="nav-crumb" href="/?cat=03-ugc-social">📱 UGC &amp; Social</a><span class="nav-sep">›</span><span class="nav-crumb active">10s MV Trio: Pop • Guofeng • Neon Bass</span>
+  <span class="nav-spacer"></span>
+  <a class="nav-badge" href="https://github.com/gai1680857-prog/awesome-seedance-prompts" target="_blank" rel="noopener">GitHub</a>
+</nav>
+<main class="case-layout">
+  <span class="case-category-badge">📱 UGC &amp; Social</span>
+  <h1 class="case-title">10s MV Trio: Pop • Guofeng • Neon Bass</h1>
+  <p class="case-tagline">10s MV trio pack - beat-synced cuts, three styles, high rewatch rhythm.</p>
+  <div class="video-wrap">
+  <video controls autoplay muted loop playsinline preload="metadata">
+    <source src="https://github.com/user-attachments/assets/3603f5d2-900f-4e2d-afba-570851980a01">
+    <div class="video-fallback">
+      <p>Video preview not available in your browser.</p>
+      <a href="https://github.com/user-attachments/assets/3603f5d2-900f-4e2d-afba-570851980a01" target="_blank" rel="noopener">Open video directly →</a>
+    </div>
+  </video>
+</div>
+  <div class="source-box">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span><a href="https://x.com/songguoxiansen" target="<em>blank" rel="noopener noreferrer">松果先森</a> - <a href="https://x.com/songguoxiansen/status/2021837242767905051" target="</em>blank" rel="noopener noreferrer">Post</a> · <em>Created: February 12</em></span>
+  </div>
+  <div class="prompt-header">
+    <span class="prompt-label">Prompt</span>
+    <button class="copy-btn" onclick="copyPrompt('prompt-text')">Copy</button>
+  </div>
+  <pre id="prompt-text" class="prompt-box">The following was generated using the prompts from version 1. Video generation: 10-second music
+video with beat syncing. 10 seconds, music video with beat syncing, 16:9 or 9:16. Here are 3
+different style versions:
+
+Version 1: K-pop girl group - fast cut beat syncing (high-energy stage) Seedance 2.0 Prompts:
+10-second K-pop girl group MV beat syncing footage, 2.35:1 widescreen, 24fps, 8 fast cut shots.
+
+0-1 second: Low-angle shot, four girl group members standing in a triangular formation on the stage
+floor, lights flashing with the beat, the stage &quot;seems to vibrate,&quot; all members simultaneously
+inhale in preparation;
+
+2-3 seconds: Close-up of the lead vocalist in the center, breath and eyes gripping the camera, hair
+slightly swaying, background light shifting from cool blue to pinkish-purple;
+
+4-5 seconds: Medium shot of group dance, movements exploding, footsteps starting to enter, all
+members simultaneously tossing their hair and turning, movements fluid and graceful;
+
+6-7 seconds: Close-up of hands, gestures causing the fabric to rustle and accessories to jingle,
+rings flashing under the lights;
+
+8-9 seconds: Side view of two members, movements more complex, footsteps more frequent, the camera
+cuts to the movements, the two members' hands precisely coordinated;
+
+10 seconds: Close-up of the formation, frozen for 0.5 seconds, ending with a final footstep/beat.
+Overall: High-saturation neon lights with contrasting warm and cool tones, shallow depth of field
+highlighting the movements, no text, logos, or watermarks. ---
+
+Version 2: Ancient Chinese Style - Melodious Flute (Memories and Beats) Seedance 2.0 Prompt:
+10-second Chinese style MV beat-matching shot, 9:16 vertical screen, ink painting style.
+
+0-2 seconds: A wide, fixed shot shows a woman in white playing a guqin (a seven-stringed zither)
+deep in a bamboo forest, her back to the camera. Smoke rises slowly from the bottom of the
+instrument, and the bamboo leaves tremble slightly with the music.
+
+3-4 seconds: The camera zooms in on the woman's profile in slow motion. Her eyelashes flutter, and
+she smiles as the strings vibrate under her fingers. The background is blurred.
+
+5-7 seconds: The moment the woman looks up at the camera, the scene cuts in—countless pink petals
+fall from the sky. The camera slowly rotates 360 degrees to show the stunning scene of the petals
+surrounding her, each petal clearly visible.
+
+8-9 seconds: The camera pulls back to a wide shot. The woman turns to face the camera, her robes
+fluttering in the wind. The bamboo forest behind her glows golden in the sunset. She gently touches
+the strings of the guqin, and the scene freezes.
+
+10 seconds: The scene gradually transitions to an ink wash effect, finally ending with the lingering
+sound of the guqin and the rustling of the bamboo leaves.
+
+--- Version 3: Electronic Music Future Bass·Neon Rainy Night (Cyber ​​Beat) Seedance 2.0 Cue words:
+10-second electronic music Future Bass MV beat-matching shot, ultra-wide screen, neon city night
+scene.
+
+0-1 second: Fixed shot, neon lights of a rainy city street reflect on the ground, cyberpunk
+architecture is reflected in puddles, the rhythm of the scene is slightly jittery in sync with the
+low-frequency bass;
+
+2-4 seconds: The camera quickly pushes forward along the street, through the rain curtain, each
+raindrop splashing with each bass beat, the camera speed fluctuating with the music rhythm;
+
+5-7 seconds: Cut to the character's perspective, a girl wearing headphones dances in the rain, her
+movements perfectly synchronized with the bass—each beat freezes her body for a sense of abruptness,
+neon lights create light trails on her body, raindrops shatter in the air from the music;
+
+8-9 seconds: The camera rapidly pulls back and pans upwards, overlooking the entire neon street,
+visual ripples of the bass in the rain radiate from the center of the street, each ripple precisely
+corresponding to a beat; 10 seconds: The scene freezes at the overhead view, the street scene
+instantly reverses to black and white on the last beat and then fades to black, ending with the
+aftershocks of the bass and the fading sound of the rain.</pre>
+  <div style="display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;">
+
+<a href="/cases/360-sweet-spot-selfie-reel" style="flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;font-size:0.85rem;color:var(--text-muted);display:block;text-align:right;">360 Sweet-Spot Selfie Reel →</a>
+</div>
+</main>
+
+<footer>
+  <p>Collected from the community · <a href="https://github.com/gai1680857-prog/awesome-seedance-prompts" target="_blank" rel="noopener">GitHub</a> · MIT License</p>
+</footer>
+<script>
+function copyPrompt(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
